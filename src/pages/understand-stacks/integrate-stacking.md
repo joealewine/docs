@@ -10,11 +10,9 @@ images:
   sm: /images/pages/stacking-rounded.svg
 ---
 
-![What you'll create in this tutorial](/images/stacking-view.png)
+> Try the [Stacks Wallet](https://www.hiro.so/wallet) to experience the Stacking flow as a token holder
 
 ## Introduction
-
-!> The Stacking implementation is still in development and could change in the coming weeks
 
 In this tutorial, you'll learn how to integrate Stacking by interacting with the respective smart contract, as well as reading data from the Stacks blockchain.
 
@@ -313,7 +311,7 @@ const stackingStatus = await client.getStatus();
 
 To display the unlocking time, you need to use the `firstRewardCycle` and the `lockPeriod` fields.
 
--> Coming soon: how to obtain rewards paid out to the stacker? how to find out if an account has stacked tokens?
+// TODO: Rewards and get-stacker-info
 
 **Congratulations!** With the completion of this step, you successfully learnt how to ...
 
@@ -322,17 +320,3 @@ To display the unlocking time, you need to use the `firstRewardCycle` and the `l
 - Verify stacking eligibility
 - Add stacking action
 - Display stacking status
-
-## Implementing delegation
-
-~> Right now, the tooling does not support the delegation flow. However, the delegation flow can be implemented with contract calls to the Stacking contract
-
-Stacking delegation requires you to implement a different flow. Until the provided tooling supports this flow, it is best to implement the required contract calls directly.
-
-Below is a description of contract calls required to integrate delegation:
-
-1. Account holders call the [`delegate-stx`](/references/stacking-contract#delegate-stx) method and provide the delegator address, the amount accessible to the delegator, the address rewards should be sent to, and the burn height at which the delegation relationship should be terminated
-2. For each delegation relationship that was created, the delegator calls the [`delegator-stack-stx`](/references/stacking-contract#delegate-stack-stx) method to lock up the STX token from the account holder. This method must be called until the delegator locked up enough STX tokens required to participate in Stacking
-3. With pooling being completed and the minimum STX token threshold reached, the delegator calls the [`stack-aggregation-commit`](/references/stacking-contract#stack-aggregation-commit) to confirm participation in the next cycle(s)
-
-In case STX token holders want to terminate the delegation relationship before it terminates as planned, they can call the [`revoke-delegate-stx`](http://localhost:3000/references/stacking-contract#revoke-delegate-stx) method
